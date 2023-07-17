@@ -9,7 +9,7 @@ import (
 
 var DB *gorm.DB
 
-func Connect() {
+func ConnectDB() {
 	var err error
 	dbUrl := os.Getenv("DB_URL")
 
@@ -19,4 +19,8 @@ func Connect() {
 	if err != nil {
 		panic("🔴 Failed to connect to DB!")
 	}
+}
+
+func SyncDb() {
+	DB.AutoMigrate()
 }
