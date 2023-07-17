@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/souljacker/gokissa/initializers"
 )
@@ -8,7 +10,12 @@ import (
 func init() {
 	initializers.ConnectDB()
 	initializers.SyncDb()
+	initializers.SetApp()
+	initializers.SetRoutes()
 
 }
 
-func main() {}
+func main() {
+
+	initializers.App.Listen(":" + os.Getenv("PORT"))
+}
