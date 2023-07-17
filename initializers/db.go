@@ -3,6 +3,7 @@ package initializers
 import (
 	"os"
 
+	"github.com/souljacker/gokissa/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -22,5 +23,11 @@ func ConnectDB() {
 }
 
 func SyncDb() {
-	DB.AutoMigrate()
+
+	err := DB.AutoMigrate(models.ModelsToMigrate...)
+
+	if err != nil {
+		panic("🔴 Failed to sync DB!")
+	}
+
 }
